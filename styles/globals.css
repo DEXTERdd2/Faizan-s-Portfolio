@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  [data-theme="dark"] {
+    --background: #070a10;
+    --foreground: #eceae6;
+    --ink: #0a0a0a;
+    --muted: #8b919c;
+    --line: rgba(255, 255, 255, 0.08);
+    --surface: #0f131c;
+    --surface-elevated: #161b26;
+    --card: rgba(18, 22, 32, 0.85);
+    --card-hover: rgba(22, 28, 40, 0.95);
+    --section: rgba(10, 13, 20, 0.92);
+    --accent: #b15f2c;
+    --accent-from: #cf8047;
+    --accent-to: #97501f;
+    --glow: rgba(177, 95, 44, 0.15);
+    --radius-pill: 9999px;
+    --radius-card: 2rem;
+    --radius-card-sm: 1.25rem;
+    --radius-control: 0.875rem;
+    --text-watermark: 13rem;
+    --container-shell: 88rem;
+  }
+
+  [data-theme="light"] {
+    --background: #f4f3f0;
+    --foreground: #111111;
+    --line: #e6e5e2;
+    --surface: #f1f0ee;
+    --surface-elevated: #ffffff;
+    --card: rgba(255, 255, 255, 0.85);
+    --card-hover: #ffffff;
+    --section: rgba(255, 255, 255, 0.88);
+    --glow: rgba(177, 95, 44, 0.08);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (max-width: 1920px) {
+    html {
+      font-size: 0.833333vw;
+    }
+  }
+  @media (max-width: 1440px) {
+    html {
+      font-size: 1.111111vw;
+    }
+  }
+  @media (max-width: 1024px) {
+    html {
+      font-size: 1.5625vw;
+    }
+  }
+  @media (max-width: 640px) {
+    html {
+      font-size: 4.444444vw;
+    }
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Onest", system-ui, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: rgba(177, 95, 44, 0.25);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    max-width: var(--container-shell);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section-bg {
+    position: relative;
+    background: var(--section);
+  }
+
+  .section-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.45;
+    background-image:
+      linear-gradient(rgba(207, 128, 71, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(207, 128, 71, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  }
+
+  .card-surface {
+    background: var(--card);
+    border-color: var(--line);
+    backdrop-filter: blur(12px);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .card-surface:hover {
+    background: var(--card-hover);
+    border-color: rgba(207, 128, 71, 0.25);
+    box-shadow: 0 0 0 1px rgba(207, 128, 71, 0.08), 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .dev-card-frame {
+    position: relative;
+    border-radius: inherit;
+  }
+
+  .dev-scanline {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  .dev-scanline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, rgba(207, 128, 71, 0.06), transparent);
+    animation: scanline 4s ease-in-out infinite;
+  }
+
+  @keyframes scanline {
+    0%,
+    100% {
+      top: -40%;
+    }
+    50% {
+      top: 100%;
+    }
+  }
+
+  .code-glow {
+    text-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
+  }
+
+  .code-rain {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 80px,
+      rgba(207, 128, 71, 0.15) 80px,
+      rgba(207, 128, 71, 0.15) 81px
+    );
+    animation: code-rain 20s linear infinite;
+  }
+
+  @keyframes code-rain {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 400px;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 60;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    clip: auto;
+    overflow: visible;
+    white-space: normal;
+    border-radius: var(--radius-control);
+    background: var(--ink);
+    font-size: 0.875rem;
+    color: #fff;
+  }
+}

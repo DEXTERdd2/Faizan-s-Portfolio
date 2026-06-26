@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#020617"/>
+  <circle cx="600" cy="315" r="200" fill="#3B82F6" opacity="0.15"/>
+  <circle cx="400" cy="200" r="150" fill="#2563EB" opacity="0.1"/>
+  <circle cx="800" cy="400" r="120" fill="#3B82F6" opacity="0.08"/>
+  <text x="600" y="280" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="48" font-weight="700">Muhammad Faizan Shahid</text>
+  <text x="600" y="340" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="24">Senior Software Engineer | Full Stack Developer</text>
+  <rect x="500" y="380" width="200" height="4" rx="2" fill="#3B82F6" opacity="0.5"/>
+</svg>
