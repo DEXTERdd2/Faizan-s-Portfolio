@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import { projects, projectCategories } from "@/data/site-data";
 import { ArrowUpRight, LogoMark } from "@/components/lumora/icons";
 import { Eyebrow } from "@/components/lumora/eyebrow";
@@ -9,6 +8,7 @@ import { LineReveal, Reveal } from "@/components/lumora/text-reveal";
 import { HoverSpring } from "@/components/lumora/hover-spring";
 import { useTilt } from "@/hooks/use-mouse";
 import { PillButton } from "@/components/lumora/pill-button";
+import { ProjectCoverImage } from "@/components/lumora/project-preview-frame";
 import { motion } from "framer-motion";
 
 function ProjectCard({ project, index }: { project: (typeof projects)[0]; index: number }) {
@@ -26,13 +26,12 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
             onMouseLeave={() => setHovered(false)}
           >
             <div className="relative h-52 overflow-hidden sm:h-64">
-              <Image
-                src={project.image}
+              <ProjectCoverImage
+                projectId={project.id}
+                variant="cover"
+                image={project.image}
                 alt={project.title}
-                fill
-                loading="lazy"
-                className="object-cover transition duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="absolute inset-0 transition duration-700 group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
 
@@ -159,7 +158,7 @@ export function Projects() {
           ))}
         </div>
 
-        <ul className="grid gap-6 md:grid-cols-2">
+        <ul className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((project, i) => (
             <li key={project.id}>
               <ProjectCard project={project} index={i} />

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { featuredProject } from "@/data/site-data";
 import { Eyebrow } from "@/components/lumora/eyebrow";
@@ -11,10 +10,18 @@ import { MagneticWrap } from "@/components/lumora/magnetic-wrap";
 import { HoverSpring } from "@/components/lumora/hover-spring";
 import { ArrowUpRight } from "@/components/lumora/icons";
 import { ProjectPreviewFrame } from "@/components/lumora/project-preview-frame";
+import { ProjectDashboardArt } from "@/components/projects/project-dashboard-art";
 
 export function FeaturedProject() {
   const p = featuredProject;
-  const gallery = p.gallery ?? [{ src: p.image, label: p.category, subtitle: p.clientType }];
+  const gallery = p.gallery ?? [
+    {
+      variant: "cover" as const,
+      label: p.category,
+      subtitle: p.clientType,
+      isCover: true,
+    },
+  ];
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const current = gallery[slide];
@@ -56,22 +63,21 @@ export function FeaturedProject() {
                     className="absolute inset-0"
                   >
                     {current.isCover ? (
-                      <div className="relative h-full w-full bg-gradient-to-br from-[#0c1018] to-[#141820]">
-                        <Image
-                          src={current.src}
-                          alt={`${p.title} — ${current.label}`}
-                          fill
-                          priority={slide === 0}
-                          className="object-cover"
-                          sizes="(max-width: 1024px) 100vw, 50vw"
+                      <div className="relative h-full w-full">
+                        <ProjectDashboardArt
+                          projectId={p.id}
+                          variant={current.variant}
+                          showChrome
+                          className="h-full w-full"
+                          aria-label={`${p.title} — ${current.label}`}
                         />
                       </div>
                     ) : (
                       <ProjectPreviewFrame
-                        src={current.src}
+                        projectId={p.id}
+                        variant={current.variant}
                         alt={`${p.title} — ${current.label}`}
-                        url={current.frameUrl ?? "pearly.store"}
-                        priority={slide === 0}
+                        url={current.frameUrl ?? "pearly.store/admin"}
                       />
                     )}
                   </motion.div>

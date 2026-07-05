@@ -41,7 +41,7 @@ export function Skills() {
 
   return (
     <section id="skills" className="relative section-bg">
-      <div className="shell py-14 lg:py-20">
+      <div className="shell section-spacing">
         <div className="mb-8 text-center">
           <Reveal><Eyebrow className="rounded-pill border border-line px-4 py-1.5">Tech Stack</Eyebrow></Reveal>
           <LineReveal
@@ -87,7 +87,7 @@ export function Skills() {
               </p>
             )}
             <h3 className="mb-6 text-center text-2xl font-semibold">{active.name}</h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {active.skills.map((skill) => (
                 <SkillCard key={skill.name} name={skill.name} level={skill.level} />
               ))}

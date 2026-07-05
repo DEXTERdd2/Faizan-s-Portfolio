@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { ProjectDashboardArt } from "@/components/projects/project-dashboard-art";
+import type { ProjectPreviewVariant } from "@/types";
 
-/** Displays admin/dashboard screenshots in a browser frame — no cropping */
+/** Displays admin/dashboard previews in a browser frame */
 export function ProjectPreviewFrame({
-  src,
+  projectId,
+  variant = "dashboard",
   alt,
-  url = "pearly.store/admin",
-  priority = false,
+  url = "app.example/admin",
 }: {
-  src: string;
+  projectId: string;
+  variant?: ProjectPreviewVariant;
   alt: string;
   url?: string;
   priority?: boolean;
@@ -25,18 +28,53 @@ export function ProjectPreviewFrame({
             {url}
           </div>
         </div>
-        <div className="relative flex-1 bg-[#faf8f5]">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            priority={priority}
-            unoptimized
-            className="object-contain object-left-top p-1"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+        <div className="relative min-h-[220px] flex-1 bg-[#faf8f5]">
+          <ProjectDashboardArt
+            projectId={projectId}
+            variant={variant}
+            className="absolute inset-0"
+            aria-label={alt}
           />
         </div>
       </div>
     </div>
+  );
+}
+
+/** Card / thumbnail cover — dashboard mockup or legacy image URL */
+export function ProjectCoverImage({
+  projectId,
+  variant = "cover",
+  image,
+  alt,
+  className = "",
+}: {
+  projectId: string;
+  variant?: ProjectPreviewVariant;
+  image?: string;
+  alt: string;
+  className?: string;
+}) {
+  if (image && image.startsWith("http")) {
+    return (
+      <Image
+        src={image}
+        alt={alt}
+        fill
+        loading="lazy"
+        className={`object-cover ${className}`}
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+    );
+  }
+
+  return (
+    <ProjectDashboardArt
+      projectId={projectId}
+      variant={variant}
+      compact
+      className={className}
+      aria-label={alt}
+    />
   );
 }

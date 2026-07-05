@@ -64,7 +64,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative section-bg">
-      <div className="shell py-14 lg:py-20">
+      <div className="shell section-spacing">
         <Reveal><Eyebrow>Contact</Eyebrow></Reveal>
         <LineReveal
           delay={120}
@@ -75,9 +75,9 @@ export function Contact() {
 
         <div className="grid gap-12 lg:grid-cols-5">
           <Reveal y={20} className="lg:col-span-2">
-            <div className="relative rounded-card border border-line bg-surface/30 p-6 sm:p-8">
-              <div className="absolute -right-2 -top-2">
-                <span className="inline-flex items-center gap-2 rounded-pill border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-700">
+            <div className="relative rounded-card border border-line bg-surface/30 p-6 pt-14 sm:p-8 sm:pt-16">
+              <div className="absolute left-4 right-4 top-4 flex justify-end sm:left-auto sm:right-4">
+                <span className="inline-flex max-w-full items-center gap-2 rounded-pill border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-300">
                   <span className="size-2 animate-pulse rounded-pill bg-emerald-500" />
                   Available for new projects
                 </span>

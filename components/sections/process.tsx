@@ -8,7 +8,7 @@ import { HoverSpring } from "@/components/lumora/hover-spring";
 export function Process() {
   return (
     <section id="process" className="relative section-bg">
-      <div className="shell py-14 lg:py-20">
+      <div className="shell section-spacing">
         <div className="mb-10 text-center">
           <Reveal><Eyebrow className="rounded-pill border border-line px-4 py-1.5">How I Work</Eyebrow></Reveal>
           <LineReveal
@@ -22,7 +22,7 @@ export function Process() {
           </Reveal>
         </div>
 
-        <ol className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+        <ol className="relative grid grid-cols-1 gap-3 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
           <div className="pointer-events-none absolute left-0 right-0 top-1/2 hidden h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-accent/30 to-transparent xl:block" />
           {processSteps.map((step, i) => (
             <Reveal key={step.id} delay={i * 70} y={20}>

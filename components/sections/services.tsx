@@ -24,7 +24,7 @@ const groups = [
 export function Services() {
   return (
     <section id="services" className="relative section-bg">
-      <div className="shell py-14 lg:py-20">
+      <div className="shell section-spacing">
         <Reveal><Eyebrow>Services</Eyebrow></Reveal>
         <LineReveal
           delay={120}
@@ -48,7 +48,7 @@ export function Services() {
                     {"// "}{group.title}
                   </h3>
                 </Reveal>
-                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {items.map((service, i) => (
                     <Reveal key={service.id} delay={gi * 80 + i * 50} y={20}>
                       <li>

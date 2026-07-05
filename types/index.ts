@@ -33,10 +33,25 @@ export interface SkillCategory {
   icon?: string;
 }
 
+export type ProjectPreviewVariant =
+  | "cover"
+  | "dashboard"
+  | "users"
+  | "products"
+  | "media"
+  | "patients"
+  | "projects"
+  | "candidates"
+  | "messages"
+  | "drivers"
+  | "players"
+  | "inventory"
+  | "bookings";
+
 export interface ProjectGalleryItem {
-  src: string;
   label: string;
   subtitle: string;
+  variant: ProjectPreviewVariant;
   frameUrl?: string;
   isCover?: boolean;
 }
@@ -46,7 +61,8 @@ export interface Project {
   title: string;
   category: string;
   description: string;
-  image: string;
+  image?: string;
+  previewVariant?: ProjectPreviewVariant;
   technologies: string[];
   features: string[];
   role: string;

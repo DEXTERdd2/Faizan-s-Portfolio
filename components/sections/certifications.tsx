@@ -9,7 +9,7 @@ import { ArrowUpRight } from "@/components/lumora/icons";
 export function Certifications() {
   return (
     <section id="certifications" className="relative section-bg">
-      <div className="shell py-14 lg:py-20">
+      <div className="shell section-spacing">
         <div className="mb-10 text-center">
           <Reveal><Eyebrow className="rounded-pill border border-line px-4 py-1.5">Credentials</Eyebrow></Reveal>
           <LineReveal

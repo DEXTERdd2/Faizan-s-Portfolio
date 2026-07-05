@@ -106,6 +106,15 @@ export const heroBadges = [
   { label: "Focus: Enterprise APIs & AI", tone: "neutral" as const },
 ];
 
+export const heroBullets = [
+  "Full Stack Developer",
+  "ASP.NET Core Engineer",
+  "Backend Architect",
+];
+
+export const heroSummary =
+  "Senior Software Engineer with 5+ years building scalable web applications, cloud-native APIs, and AI-powered automation for international clients.";
+
 export const heroBio =
   "Senior Software Engineer with 5+ years of experience designing and developing scalable web applications. I lead and mentor development teams, conduct code reviews, define project scope, and ensure on-time delivery using Agile (Scrum/Kanban) methodologies. Experienced in building secure, high-performance applications with ASP.NET Core, C#, RESTful APIs, Entity Framework Core, SQL Server, MySQL, and Dapper. Proficient in frontend development using React.js, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, and Bootstrap. Skilled in deploying, monitoring, and optimizing cloud solutions on Microsoft Azure, including App Services, Azure SQL Database, Azure Storage, Azure DevOps, CI/CD pipelines, and Application Insights. Passionate about clean architecture, SOLID principles, performance optimization, and delivering reliable, business-driven software solutions.";
 
@@ -426,28 +435,27 @@ export const projects: Project[] = [
       "A production-style luxury e-commerce platform with a Shopify-inspired admin, headless CMS, and a polished customer storefront.",
     description:
       "Pearly is a full-stack e-commerce web application built for a luxury handmade jewelry and accessories brand. It combines a high-end customer storefront with an enterprise-grade admin dashboard and content management system, so store owners can run products, orders, marketing, and site content without touching code.",
-    image: "/projects/pearly/cover.png",
     gallery: [
       {
-        src: "/projects/pearly/cover.png",
+        variant: "cover",
         label: "Pearly Platform",
         subtitle: "Luxury storefront + enterprise admin in one stack",
         isCover: true,
       },
       {
-        src: "/projects/pearly/admin-dashboard.png",
+        variant: "dashboard",
         label: "Admin Dashboard & CMS",
         subtitle: "Store operations, content, and team management",
         frameUrl: "pearly.store/admin",
       },
       {
-        src: "/projects/pearly/products-admin.png",
+        variant: "products",
         label: "Product Catalog",
         subtitle: "Create, edit, bulk actions, CSV import/export",
         frameUrl: "pearly.store/admin/products",
       },
       {
-        src: "/projects/pearly/media-library.png",
+        variant: "media",
         label: "CMS Media Library",
         subtitle: "Homepage, blog, banners, and asset management",
         frameUrl: "pearly.store/admin/media",
@@ -493,8 +501,7 @@ export const projects: Project[] = [
     category: "Healthcare",
     description:
       "Comprehensive electronic health records and practice management system for medical facilities with patient scheduling, billing, and clinical documentation.",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+    previewVariant: "patients",
     technologies: ["ASP.NET Core", "MVC", "SQL Server", "Azure"],
     features: [
       "Patient Management",
@@ -518,8 +525,7 @@ export const projects: Project[] = [
     category: "Enterprise",
     description:
       "Real-time translation management platform with collaborative workflows, project tracking, and automated quality assurance processes.",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+    previewVariant: "projects",
     technologies: ["ASP.NET Core", "SignalR", "Azure", "Microservices"],
     features: [
       "Real-time Collaboration",
@@ -543,8 +549,7 @@ export const projects: Project[] = [
     category: "AI",
     description:
       "Intelligent CV parsing platform leveraging OpenAI and FastAPI to extract structured data from resumes with high accuracy.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    previewVariant: "candidates",
     technologies: ["ASP.NET Core", "OpenAI", "FastAPI"],
     features: [
       "AI-Powered Parsing",
@@ -568,8 +573,7 @@ export const projects: Project[] = [
     category: "Business",
     description:
       "Multi-channel communication platform integrating Voice, SMS, and WhatsApp for enterprise customer engagement.",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80",
+    previewVariant: "messages",
     technologies: ["ASP.NET Core", "Twilio", "SignalR", "Azure"],
     features: [
       "Voice Integration",
@@ -593,8 +597,7 @@ export const projects: Project[] = [
     category: "Business",
     description:
       "GPS-enabled ride management system with real-time tracking, route optimization, and driver management capabilities.",
-    image:
-      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80",
+    previewVariant: "drivers",
     technologies: ["ASP.NET Core", "GPS", "Maps API", "REST APIs"],
     features: [
       "Real-time Tracking",
@@ -618,8 +621,7 @@ export const projects: Project[] = [
     category: "Admin Panels",
     description:
       "High-performance gaming backend with real-time APIs, player authentication, leaderboards, and matchmaking services.",
-    image:
-      "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80",
+    previewVariant: "players",
     technologies: ["ASP.NET Core", "SignalR", "Redis", "SQL Server"],
     features: [
       "Real-time Multiplayer",
@@ -643,8 +645,7 @@ export const projects: Project[] = [
     category: "ERP",
     description:
       "Full-featured ERP solution with inventory management, billing, accounting, and comprehensive reporting modules.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    previewVariant: "inventory",
     technologies: ["ASP.NET Core", "SQL Server", "Azure", "Angular"],
     features: [
       "Inventory Management",
@@ -668,8 +669,7 @@ export const projects: Project[] = [
     category: "E-Commerce",
     description:
       "Complete travel agency management system with booking, payments, itinerary planning, and customer relationship management.",
-    image:
-      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80",
+    previewVariant: "bookings",
     technologies: ["ASP.NET Core", "Payment Gateway", "SQL Server"],
     features: [
       "Online Booking",

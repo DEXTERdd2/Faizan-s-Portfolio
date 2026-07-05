@@ -1,46 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe } from "@/components/lumora/icons";
 import { PillButton } from "@/components/lumora/pill-button";
 import { Eyebrow } from "@/components/lumora/eyebrow";
 import { Reveal, WordReveal } from "@/components/lumora/text-reveal";
 import { HoverSpring } from "@/components/lumora/hover-spring";
 import { SocialIcon } from "@/components/lumora/social-icon";
+import { AboutAmbient } from "@/components/sections/about-ambient";
+import { AboutShowcase, AboutTechStrip } from "@/components/sections/about-visuals";
 import { aboutHighlights, socialLinks } from "@/data/site-data";
 import { useCountUp } from "@/hooks/use-mouse";
 
 const highlights = [
   {
-    title: "Backend Specialist",
-    desc: "ASP.NET Core expert with deep API architecture knowledge",
-    icon: "⚙",
+    title: "System Architecture",
+    desc: "Scalable design, microservices, and enterprise cloud architecture",
   },
   {
-    title: "Team Lead",
-    desc: "Led cross-functional teams delivering enterprise solutions",
-    icon: "◆",
+    title: "Full Stack Development",
+    desc: "End-to-end with ASP.NET Core, React, and modern web stacks",
   },
   {
     title: "Clean Architecture",
-    desc: "SOLID principles, CQRS, and microservices patterns",
-    icon: "◇",
+    desc: "SOLID principles, CQRS, and maintainable codebases",
   },
   {
     title: "AI Integration",
     desc: "LLM workflows, RAG pipelines, and intelligent automation",
-    icon: "✦",
-    accent: true,
+    featured: true,
   },
-];
-
-const expertise = [
-  "ASP.NET Core",
-  "Azure",
-  "REST APIs",
-  "Microservices",
-  "OpenAI",
-  "Next.js",
 ];
 
 function parseStat(value: string) {
@@ -49,33 +37,28 @@ function parseStat(value: string) {
   return { num: parseInt(match[1], 10), suffix: match[2] };
 }
 
-function StatCard({ value, label, index }: { value: string; label: string; index: number }) {
+function StatItem({ value, label, index }: { value: string; label: string; index: number }) {
   const { num, suffix } = parseStat(value);
-  const { count, ref } = useCountUp(num, 1800);
+  const { count, ref } = useCountUp(num, 1600);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 16, scale: 0.96 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08, duration: 0.5 }}
-      whileHover={{ y: -4, borderColor: "rgba(207,128,71,0.35)" }}
-      className="group relative overflow-hidden rounded-2xl border border-line card-surface px-3 py-4 text-center backdrop-blur-sm"
+      transition={{ delay: index * 0.06, duration: 0.45 }}
+      className="about-stat"
     >
-      <motion.span
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
-      />
-      <p className="relative text-xl font-bold text-accent sm:text-2xl">
-        {count}
-        {suffix}
+      <p className="text-2xl font-semibold tracking-tight text-foreground sm:text-[1.75rem]">
+        <span className="text-accent">{count}{suffix}</span>
       </p>
-      <p className="relative mt-1 text-xs text-foreground/50">{label}</p>
+      <p className="mt-1 text-[0.7rem] text-foreground/45">{label}</p>
     </motion.div>
   );
 }
 
-function HighlightCard({
+function ExpertiseCard({
   item,
   index,
 }: {
@@ -83,160 +66,91 @@ function HighlightCard({
   index: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -6 }}
-      className={`group relative h-full overflow-hidden rounded-2xl border p-5 backdrop-blur-sm transition-colors ${
-        item.accent
-          ? "border-accent/25 bg-gradient-to-br from-accent/10 via-surface/40 to-surface/20"
-          : "border-line card-surface hover:border-accent/25"
-      }`}
+      transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -3 }}
+      className={`group about-expertise ${item.featured ? "about-expertise-featured" : ""}`}
     >
-      {item.accent && (
-        <motion.span
-          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-          animate={{ x: ["-100%", "200%"] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
-        />
-      )}
-      <div className="relative flex items-start justify-between gap-2">
-        <span className="font-mono text-xs text-accent/70">{String(index + 1).padStart(2, "0")}</span>
-        <span className="text-sm text-accent/60">{item.icon}</span>
-      </div>
-      <h3 className="relative mt-3 font-semibold text-foreground">{item.title}</h3>
-      <p className="relative mt-2 text-sm leading-relaxed text-foreground/60">{item.desc}</p>
-    </motion.div>
+      <span className="about-expertise-num">{String(index + 1).padStart(2, "0")}</span>
+      <h3 className="mt-4 text-base font-semibold tracking-tight text-foreground">{item.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-foreground/55">{item.desc}</p>
+      <span className="mt-4 block h-px w-8 bg-accent/40 transition-all duration-300 group-hover:w-full" />
+    </motion.article>
   );
 }
 
 export function About() {
   return (
     <section id="about" className="relative overflow-hidden section-bg">
-      {/* Ambient */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute -left-20 top-1/4 size-72 rounded-full bg-accent/6 blur-[100px]" />
-        <div className="absolute -right-16 bottom-1/4 size-64 rounded-full bg-purple-600/5 blur-[90px]" />
-      </div>
+      <AboutAmbient />
 
-      <div className="shell relative py-14 lg:py-20">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left column */}
-          <div className="relative">
-            <div className="relative z-10 flex flex-col gap-8">
-              <div>
-                <Reveal>
-                  <Eyebrow>About Me</Eyebrow>
-                </Reveal>
-                <Reveal y={12} className="mt-6">
-                  <p className="max-w-md text-sm leading-relaxed text-foreground/70 sm:text-base">
-                    I&apos;m a{" "}
-                    <strong className="font-medium text-foreground">
-                      Senior Full Stack Software Engineer
-                    </strong>{" "}
-                    with 5+ years building enterprise-grade applications. I specialize in ASP.NET
-                    Core, Azure cloud architecture, and AI-powered automation for international
-                    clients.
-                  </p>
-                </Reveal>
-              </div>
+      <div className="shell relative section-spacing">
+        <AboutTechStrip />
 
-              <div className="relative">
-                <motion.div
-                  className="pointer-events-none absolute -right-4 bottom-0 z-0 hidden opacity-[0.035] sm:block lg:-right-8"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-                  aria-hidden
-                >
-                  <Globe className="size-40 lg:size-48" />
-                </motion.div>
-
-                <div className="relative z-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {aboutHighlights.map((s, i) => (
-                    <StatCard key={s.label} value={s.value} label={s.label} index={i} />
-                  ))}
-                </div>
-              </div>
-
-              <Reveal delay={160} y={12}>
-                <motion.div
-                  whileHover={{ scale: 1.01 }}
-                  className="flex items-center gap-3 rounded-2xl border border-line/60 bg-surface/40 px-4 py-3.5 text-sm text-foreground/70 backdrop-blur-sm"
-                >
-                  <span className="relative flex size-2 shrink-0">
-                    <span className="absolute inline-flex size-full animate-ping rounded-pill bg-emerald-400/60" />
-                    <span className="relative inline-flex size-2 rounded-pill bg-emerald-400" />
-                  </span>
-                  <Globe className="size-4 shrink-0 text-accent/70" />
-                  <span>Remote-first engineer serving international clients worldwide.</span>
-                </motion.div>
+        <div className="mt-12 grid items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+          {/* Left — story + showcase */}
+          <div className="flex flex-col gap-8 lg:col-span-5">
+            <div>
+              <Reveal>
+                <Eyebrow>About Me</Eyebrow>
+              </Reveal>
+              <Reveal y={10} className="mt-5">
+                <p className="text-sm leading-[1.75] text-foreground/65 sm:text-base">
+                  I&apos;m a{" "}
+                  <strong className="font-medium text-foreground">
+                    Senior Full Stack Software Engineer
+                  </strong>{" "}
+                  with 5+ years building enterprise applications — ASP.NET Core, Azure, and
+                  AI-powered systems for international clients.
+                </p>
               </Reveal>
             </div>
+
+            <AboutShowcase />
+
+            <Reveal delay={120}>
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line/60 bg-line/60 sm:grid-cols-4">
+                {aboutHighlights.map((s, i) => (
+                  <StatItem key={s.label} value={s.value} label={s.label} index={i} />
+                ))}
+              </div>
+            </Reveal>
           </div>
 
-          {/* Right column */}
-          <div className="flex flex-col gap-8">
+          {/* Right — headline + expertise */}
+          <div className="flex flex-col gap-8 lg:col-span-7">
             <WordReveal
-              className="text-2xl font-medium leading-snug tracking-tight sm:text-3xl lg:text-[2rem]"
+              className="text-[1.65rem] font-medium leading-snug tracking-tight sm:text-3xl lg:text-[2.125rem]"
               text="I partner with ambitious teams to ship"
-              mutedText="enterprise applications, scalable APIs, and intelligent systems that drive business growth."
+              mutedText="enterprise software, scalable APIs, and intelligent systems that drive growth."
             />
 
             <div className="grid gap-3 sm:grid-cols-2">
               {highlights.map((item, i) => (
-                <HighlightCard key={item.title} item={item} index={i} />
+                <ExpertiseCard key={item.title} item={item} index={i} />
               ))}
             </div>
 
-            <Reveal delay={200} y={12}>
-              <div className="flex flex-wrap gap-2">
-                {expertise.map((tag, i) => (
-                  <motion.span
-                    key={tag}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.06 }}
-                    whileHover={{
-                      scale: 1.06,
-                      borderColor: "rgba(207,128,71,0.5)",
-                      boxShadow: "0 0 20px rgba(177,95,44,0.15)",
-                    }}
-                    className="cursor-default rounded-pill border border-accent/20 bg-accent/5 px-4 py-2 text-sm font-medium text-accent"
-                  >
-                    {tag}
-                  </motion.span>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={300} y={12}>
-              <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl border border-line/60 bg-surface/30 px-5 py-5 backdrop-blur-sm">
+            <Reveal delay={200}>
+              <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line/50 bg-surface/30 px-6 py-6 backdrop-blur-sm sm:flex-row sm:items-center">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wider text-foreground/40">
-                    Find me online
+                  <p className="text-xs font-medium tracking-wide text-foreground/40">
+                    Connect
                   </p>
                   <div className="mt-3 flex gap-2">
-                    {socialLinks.map((link, i) => (
-                      <motion.div
+                    {socialLinks.map((link) => (
+                      <SocialIcon
                         key={link.name}
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.07 }}
-                        whileHover={{ y: -3 }}
-                      >
-                        <SocialIcon
-                          link={link}
-                          className="grid size-10 place-items-center rounded-pill border border-line bg-surface-elevated text-foreground/70 transition hover:border-accent/40 hover:text-accent hover:shadow-[0_0_16px_rgba(177,95,44,0.2)]"
-                        />
-                      </motion.div>
+                        link={link}
+                        className="grid size-10 place-items-center rounded-full border border-line bg-surface text-foreground/60 transition hover:border-accent/30 hover:text-accent"
+                      />
                     ))}
                   </div>
                 </div>
-                <HoverSpring scale={1.04}>
+                <HoverSpring scale={1.03}>
                   <PillButton variant="outline" arrow="right" href="#experience">
                     View Experience
                   </PillButton>

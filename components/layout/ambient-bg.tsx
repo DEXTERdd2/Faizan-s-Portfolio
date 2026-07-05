@@ -1,12 +1,12 @@
 "use client";
 
-/** Global dark atmosphere — grid, noise, floating orbs, subtle code rain */
+/** Global atmosphere — grid, noise, floating orbs; adapts to light/dark via CSS */
 export function AmbientBg() {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
       <div className="absolute inset-0 bg-background" />
       <div
-        className="absolute inset-0 opacity-[0.55]"
+        className="ambient-grid absolute inset-0 opacity-[0.55]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(207,128,71,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(207,128,71,.035) 1px, transparent 1px)",
@@ -20,9 +20,9 @@ export function AmbientBg() {
         }}
       />
       <div className="code-rain absolute inset-0 opacity-[0.03]" />
-      <div className="absolute -left-32 top-[15%] size-[28rem] rounded-full bg-accent/10 blur-[100px]" />
-      <div className="absolute -right-24 top-[50%] size-[24rem] rounded-full bg-accent-from/8 blur-[90px]" />
-      <div className="absolute bottom-[8%] left-[25%] size-72 rounded-full bg-[#1a1040]/40 blur-[80px]" />
+      <div className="ambient-orb absolute -left-32 top-[15%] size-[28rem] rounded-full bg-accent/10 blur-[100px]" />
+      <div className="ambient-orb absolute -right-24 top-[50%] size-[24rem] rounded-full bg-accent-from/8 blur-[90px]" />
+      <div className="ambient-orb absolute bottom-[8%] left-[25%] size-72 rounded-full bg-[#1a1040]/40 blur-[80px]" />
     </div>
   );
 }

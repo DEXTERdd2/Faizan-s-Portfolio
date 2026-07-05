@@ -47,7 +47,7 @@ export function TerminalStrip() {
   return (
     <div className="relative">
       <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-accent/20 via-transparent to-purple-500/20 opacity-60 blur-sm" />
-      <div className="relative overflow-hidden rounded-2xl border border-line/80 bg-[#0a0e16]/95 font-mono text-xs shadow-xl shadow-black/30 backdrop-blur-md">
+      <div className="terminal-shell relative overflow-hidden rounded-2xl border font-mono text-xs backdrop-blur-md">
         <div className="flex items-center justify-between gap-3 border-b border-line/60 px-4 py-2.5">
           <div className="flex items-center gap-2">
             <span className="size-2 rounded-pill bg-red-400/90 shadow-[0_0_6px_rgba(248,113,113,0.5)]" />

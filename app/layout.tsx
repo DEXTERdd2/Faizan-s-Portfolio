@@ -1,9 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Onest } from "next/font/google";
 import { siteConfig } from "@/data/site-data";
 import { Providers } from "@/components/layout/providers";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import "@/styles/globals.css";
 
+const onest = Onest({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -29,7 +35,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f6f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#070a10" },
+  ],
 };
 
 const jsonLd = {
@@ -49,30 +58,19 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={onest.className}>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')}catch(e){}})()`,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
-        <ThemeProvider>
+      <body className="font-sans antialiased" suppressHydrationWarning>        <ThemeProvider>
           <Providers>{children}</Providers>
         </ThemeProvider>
       </body>

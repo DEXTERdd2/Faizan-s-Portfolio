@@ -53,7 +53,7 @@ function StatNumber({
   return (
     <Reveal delay={index * 90} y={20} className="contents">
       <li ref={ref}>
-        <div className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+        <div className="text-[clamp(2rem,4vw+0.5rem,3.75rem)] font-semibold tracking-tight">
           {count}
           {suffix}
         </div>
@@ -77,7 +77,7 @@ export function WhyChooseMe() {
               lines={["Proof in the work, not the words."]}
             />
 
-            <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5">
+            <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-5">
               {stats.map((stat, i) => (
                 <StatNumber
                   key={stat.label}
